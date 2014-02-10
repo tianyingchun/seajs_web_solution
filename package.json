@@ -8,9 +8,14 @@
     "url": "https://github.com/tianyingchun/seajs_web_solution.git"
   },
   "keywords": [
+<<<<<<< HEAD
     "seajs web solution",
     "web front end solution",
     "multiple pages web framework"
+=======
+    "seajs",
+    "solution"
+>>>>>>> 1fca105... initialize project folders
   ],
   "author": "tianyingchun",
   "license": "BSD-2-Clause",

@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+<<<<<<< HEAD
 	// Project configuration.
     grunt.initConfig({
   	    pkg: grunt.file.readJSON('package.json'),
@@ -24,4 +25,7 @@ module.exports = function(grunt) {
     grunt.registerTask('sealibs', []);
     // Default task(s).
     grunt.registerTask('default', ['uglify']);
+=======
+	
+>>>>>>> 1fca105... initialize project folders
 };

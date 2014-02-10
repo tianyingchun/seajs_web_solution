@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 {
 	"dependencies": {
 		"product": "1.0.0",
 		"payment": "1.0.0"
 	}
 }
+=======
+z.depends(
+	"payment/",
+	"product/"
+);
+>>>>>>> 1fca105... initialize project folders
