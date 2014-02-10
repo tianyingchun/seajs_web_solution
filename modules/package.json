@@ -1,4 +1,6 @@
-z.depends(
-	"payment/",
-	"product/"
-);
+{
+	"dependencies": {
+		"product": "1.0.0",
+		"payment": "1.0.0"
+	}
+}
