@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/tianyingchun/seajs_web_solution",
   "devDependencies": {
+    "commander":"*",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",

@@ -1,5 +1,6 @@
-define("z/slideshow/1.0.0/slideshow-debug", [ "$-debug" ], function(require, exports, module) {
+define("sea-libs/slideshow/1.0.0/slideshow-debug", [ "jquery-debug" ], function(require, exports, module) {
     var slideshow;
-    var $ = require("$-debug");
+    var $ = require("jquery-debug");
+    $("#slideshow").html("hello slideshow plugin testing...");
     module.exports = slideshow;
 });

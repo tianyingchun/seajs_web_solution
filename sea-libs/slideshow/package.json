@@ -1,5 +1,5 @@
 {
-  "family": "z",
+  "family": "sea-libs",
   "name": "slideshow",
   "version": "1.0.0",
   "description": "the slideshow plugin based on jquery for seajs module",
@@ -23,7 +23,7 @@
       "slideshow.css"
     ],
     "alias": {
-      "$":"$"
+      "$":"jquery"
     },
     "devAlias": {},
     "engines": {}
