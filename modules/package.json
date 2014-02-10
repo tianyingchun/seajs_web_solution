@@ -1,0 +1,4 @@
+z.depends(
+	"payment/",
+	"product/"
+);
