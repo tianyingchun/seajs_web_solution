@@ -18,7 +18,7 @@ program
 
 var cwd = process.cwd();
 var custom_deploy_path = program.deploy;
-var deploy_directory = path.join(cwd, program.target);
+var deploy_directory = path.join(cwd, program.target,"sea-modules");
 var is_debug = program.debug == "debug"? true: false;
 //1.  copy configuration-matched seajs-modules into deploy directory.
 var sea_module_deploy_target_path = path.join(cwd,"sea-modules");
