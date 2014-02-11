@@ -5,16 +5,6 @@
   "description": "the slideshow plugin based on jquery for seajs module",
   "homepage": "https://github.com/tianyingchun/seajs_web_solution",
   "author": "tianyingchun",
-  "maintainers": [
-    "tianyingchun"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tianyingchun/seajs_web_solution.git"
-  },
-  "bugs": {
-    "url": ""
-  },
   "keywords": [],
   "licenses": "MIT",
   "spm": {
