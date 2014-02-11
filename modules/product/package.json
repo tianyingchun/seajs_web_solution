@@ -1,0 +1,19 @@
+{
+  "family": "modules",
+  "name": "product",
+  "version": "1.0.0",
+  "description": "the business logics product module",
+  "author": "tinayingchun<tianyingchun@outlook.com>",
+  "maintainers": [
+    "tinayingchun<tianyingchun@outlook.com>"
+  ],
+  "spm": {
+    "output": [
+      "product.js",
+      "product.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
