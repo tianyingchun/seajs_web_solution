@@ -1,4 +1,5 @@
 define("sea-libs/slideshow/1.0.0/slideshow-debug", [], function(require, exports, module) {
+    //plugin author github: https://github.com/nolimits4web/Swiper
     var Swiper = function(selector, params) {
         /*=========================
       A little bit dirty but required part for IE8 and old FF support
