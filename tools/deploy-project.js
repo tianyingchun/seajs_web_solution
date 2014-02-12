@@ -17,6 +17,7 @@ program
 	.parse(process.argv);
 
 var cwd = process.cwd();
+// customized deploy folder.
 var custom_deploy_path = program.deploy;
 var deploy_directory = path.join(cwd, program.target,"sea-modules");
 var is_debug = program.debug == "debug"? true: false;
@@ -32,5 +33,14 @@ fs.mkdirs(deploy_directory, function (err) {
 		grunt.log.write("copy sea-modules to project deploy directory `"+deploy_directory+"` successfully! ").ok();
 	});
 });
-// todo --implements project customized css  compression.
-// todo /o2o/static/....
+// build project custmoized style folder. we can't focus on javascript build here, 
+// because we should use seajs module plugin pattern to encapsulate all javascript  libaray.
+var cus_proj_build_dir = path.join(cwd, custom_deploy_path, "/deploy.json");
+fs.exists(cus_proj_build_dir, function (exist) {
+	if(!exist) { 
+		grunt.fail.fatal("Cound not find the customized build directory `"+ cus_proj_build_dir+"`");
+	} else {
+
+	}
+	
+});
