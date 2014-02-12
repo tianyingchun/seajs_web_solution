@@ -40,7 +40,7 @@ fs.exists(cus_proj_build_dir, function (exist) {
 	if(!exist) { 
 		grunt.fail.fatal("Cound not find the customized build directory `"+ cus_proj_build_dir+"`");
 	} else {
-		console.log("testing...");
+		console.log("testing...testing...");
 	}
 	
 });
