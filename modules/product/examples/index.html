@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>slideshow sample</title>
+    <style>
+    /* Demo Styles */
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    </style>
+    <script type="text/javascript" src="../../../sea-modules/seajs/seajs/2.1.1/sea.js"></script>
+
+</head>
+
+<body>
+     
+    <script type="text/javascript">
+    seajs.config({
+        base: "../",
+        // 路径配置用来跨目录调用.
+        paths: {
+            jquery: "../../../sea-modules/jquery"
+        },
+        // 别名配置,注意别名的 VALUE 只能为sea-module define 的ID 如下 jquery,只能与sea-modules/ 下面的路径
+        // define("jquery/jquery/1.10.1/jquery", [], function () { return jQuery; } );保持一致.
+        alias: {
+            "jquery": "jquery/jquery/1.10.1/jquery", //=={jquery=paths.jquery}/jquery/1.10.1/jquery
+            "jquery-debug": "jquery/jquery/1.10.1/jquery-debug"   
+        }
+    });
+    seajs.use("src/product", function(product) {
+         console.log("product", product);
+    });
+    seajs.use("jquery-debug", function($) {
+        console.log("$", $);
+    })
+    </script>
+</body>
+
+</html>
