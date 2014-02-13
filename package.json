@@ -8,14 +8,11 @@
     "url": "https://github.com/tianyingchun/seajs_web_solution.git"
   },
   "keywords": [
-<<<<<<< HEAD
     "seajs web solution",
     "web front end solution",
-    "multiple pages web framework"
-=======
+    "multiple pages web framework",
     "seajs",
     "solution"
->>>>>>> 1fca105... initialize project folders
   ],
   "author": "tianyingchun",
   "license": "BSD-2-Clause",
@@ -25,6 +22,7 @@
   "homepage": "https://github.com/tianyingchun/seajs_web_solution",
   "devDependencies": {
     "commander":"*",
+    "clean-css": "2.x",
     "fs-extra": "*",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
