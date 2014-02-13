@@ -52,7 +52,10 @@ function concatCss(sheets, doneCB) {
                 return "url('" + urlPath + "'')";
             }
             // Make relative asset path from 'top-of-the-tree/build'
-            var relPath = path.join("..", opt.relsrcdir, path.dirname(sheet), urlPath);
+            // var relPath = path.join("..", opt.relsrcdir, path.dirname(sheet), urlPath);
+            var _tmpPath = path.relative(path.dirname(sheet), opt.srcdir);
+            var relPath = urlPath.slice(_tmpPath.length + 1);
+
             if (process.platform == "win32") {
                 relPath = pathSplit(relPath).join("/");
             }
@@ -60,7 +63,7 @@ function concatCss(sheets, doneCB) {
             console.log("sheet:", sheet);
             console.log("urlPath:", urlPath);
             console.log("relPath:", relPath);
-            console.log("path.dir: ",path.dirname(sheet));
+            console.log("path.dir: ", path.dirname(sheet));
             return "url('" + relPath + "')";
         });
         blob += "\n/* " + path.relative(process.cwd(), sheet) + " */\n\n" + code + "\n";
@@ -182,9 +185,10 @@ process.on('message', function(msg) {
 
 module.exports = {
     minify: function(cpmName, cpmRootPath, options) {
-        console.log("invole minify augments: ", cpmName, cpmRootPath, options);
+        // console.log("invole minify augments: ", cpmName, cpmRootPath, options);
         opt.destdir = options.destdir;
         opt.output = options.output;
+        opt.srcdir = cpmRootPath;
         walker.init(cpmName, cpmRootPath);
         walker.walk(cpmRootPath + "/package.js", walkerFinished);
     }

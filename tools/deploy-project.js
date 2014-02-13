@@ -14,7 +14,6 @@ program
     .version('0.0.1')
     .option('-t, --target [type]', 'the dintination directory used to store deployed files.')
     .option('-d, --deploy [type]', 'the module path which will be deploy for this project! ')
-    .option('-l, --debug [type]', 'sepecific current publish module debug or live')
     .parse(process.argv);
 
 var cwd = process.cwd();
@@ -28,9 +27,6 @@ var deploy_target_base_dir = path.join(cwd, config_target);
 
 // sea-modules deploy location.
 var deploy_sea_module_dir = path.join(deploy_target_base_dir, "sea-modules");
-
-// if current is debug model.
-var is_debug = program.debug == "debug" ? true : false;
 
 //1.  copy configuration-matched seajs-modules into deploy directory.
 var sea_module_deploy_target_path = path.join(cwd, "sea-modules");

@@ -15,7 +15,7 @@ var script = function(inPath) {
 var chunks = [];
 
 var pushChunkFile = function(inType, inFile) {
-	console.log("pushChunkFile:", inType, inFile);
+	// console.log("pushChunkFile:", inType, inFile);
 	var chunk = chunks.slice(-1)[0];
 	if (!chunk || !chunk[inType]) {
 		chunk = { sheets:[], scripts:[] };
