@@ -108,7 +108,7 @@ function concatCss(sheets, doneCB) {
 
 
 var walkerFinished = function(loader, chunks) {
-    console.log("walker walkerFinished...");
+    // console.log("walker walkerFinished...");
     var outfolder = path.dirname(path.join(opt.destdir, opt.output));
     var exists = fs.existsSync || path.existsSync;
     var currChunk = 1;

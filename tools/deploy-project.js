@@ -36,18 +36,6 @@ function isArray(obj) {
     return toString.call(obj) === "[object Array]";
 }
 
-// create directory.
-fs.removeSync(deploy_sea_module_dir);
-fs.mkdirs(deploy_sea_module_dir, function(err) {
-    if (err) return console.error(err);
-    var filter = null; //  is an regex instance.
-    // copy files
-    fs.copy(sea_module_deploy_target_path, deploy_sea_module_dir, filter, function(err) {
-        if (err) return console.error(err);
-        grunt.log.write("copy sea-modules to project deploy directory `" + deploy_sea_module_dir + "` successfully! ").ok();
-    });
-});
-
 function build_customized_component(build_path) {
 
     var cus_proj_build_dir = path.join(cwd, build_path);
@@ -103,6 +91,18 @@ function build_customized_component(build_path) {
     });
 }
 
-// build project custmoized style folder. we can't focus on javascript build here, 
-// because we should use seajs module plugin pattern to encapsulate all javascript  libaray.
-build_customized_component(custom_deploy_path);
+// create directory.
+fs.removeSync(deploy_sea_module_dir);
+fs.mkdirs(deploy_sea_module_dir, function(err) {
+    if (err) return console.error(err);
+    var filter = null; //  is an regex instance.
+    // copy files
+    fs.copy(sea_module_deploy_target_path, deploy_sea_module_dir, filter, function(err) {
+        if (err) return console.error(err);
+        grunt.log.write("copy sea-modules to project deploy directory `" + deploy_sea_module_dir + "` successfully! ").ok();
+
+        // build project custmoized style folder. we can't focus on javascript build here, 
+        // because we should use seajs module plugin pattern to encapsulate all javascript  libaray.
+        build_customized_component(custom_deploy_path);
+    });
+});
