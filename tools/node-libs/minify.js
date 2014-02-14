@@ -2,7 +2,7 @@
 var fs = require("fs"),
     path = require("path"),
     walker = require("./walker"),
-    cleancss = require("../../node_modules/clean-css"),
+    CleanCSS = require("../../node_modules/clean-css"),
     program = require('../../node_modules/commander');
 
 var basename = path.basename(__filename),
@@ -66,7 +66,10 @@ function concatCss(sheets, doneCB) {
             console.log("path.dir: ", path.dirname(sheet));
             return "url('" + relPath + "')";
         });
-        blob += "\n/* " + path.relative(process.cwd(), sheet) + " */\n\n" + code + "\n";
+        // minify styles here.
+        // 
+        code = new CleanCSS().minify(code);
+        blob += "\n/* " + path.relative(process.cwd(), sheet) + " */\n" + code + "\n";
     };
     // Pops one sheet off the sheets[] array, reads (and parses if less), and then
     // recurses again from the async callback until no sheets left, then calls doneCB
