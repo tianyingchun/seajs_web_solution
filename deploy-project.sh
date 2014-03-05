@@ -11,3 +11,5 @@ node tools/deploy-project.js -t ${deploypath} -d "../static"
 # build another style components.
 node tools/deploy-project.js -t ${deploypath} -d "../static2"
 # third one.
+node tools/deploy-project.js -t ${deploypath} -d "../external"
+# third one.
