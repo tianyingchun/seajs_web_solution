@@ -42,3 +42,10 @@
 ```
 - BTW, in genneral we need to put this project as git `submodule` in your own project,
 - you can reference `o2o_web` here to see [o2o_web](https://github.com/tianyingchun/o2o_web), it an demo for this [`seajs_web_solution`](https://github.com/tianyingchun/seajs_web_solution)
+
+- BTW, for spm seajs module build we need to manuanly install spm build plugin as below
+ 
+- http://docs.spmjs.org/doc/
+- npm install spm-init -g
+- $ npm install spm-build -g
+- $ spm plugin install deploy
