@@ -1,7 +1,7 @@
 @ECHO OFF
 REM #- http://docs.spmjs.org/doc/
-REM #- npm install spm-init -g
 REM #- npm install spm -g
+REM #- npm install spm-init -g
 REM #- $ npm install spm-build -g
 REM #- $ spm plugin install deploy
 

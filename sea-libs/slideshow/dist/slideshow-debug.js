@@ -1,4 +1,4 @@
-define("sea-libs/slideshow/1.0.1/slideshow-debug", [], function(require, exports, module) {
+define("sea-libs/slideshow/1.0/slideshow-debug", [], function(require, exports, module) {
     //plugin author github: https://github.com/nolimits4web/Swiper
     var Swiper = function(selector, params) {
         /*=========================
