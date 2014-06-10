@@ -21,8 +21,14 @@ var error = function () {
 	util.log(colors.red(result));
 };
 
+var warn = function () {
+	var result = format.apply(format, arguments);
+	util.log(colors.yellow(result));
+}
+
 module.exports =  {
 	debug: debug,
 	error: error,
-	writeln: writeln
+	writeln: writeln,
+	warn: warn
 };

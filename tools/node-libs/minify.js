@@ -154,13 +154,13 @@ var walkerFinished = function(loader, chunks) {
             fs.writeFileSync(path.resolve(opt.destdir, opt.output + ".css"), "/* CSS loaded via enyo.depends() call in " + opt.output + ".js */", "utf8");
         }
 
-        w("");
+        // w("");
         w("done.");
         w("");
-
         // required to properly terminate a
         // node.process.fork() call, as defined by
         // <http://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options>
+        eventHandler.fire("compiledone", {compiler_status: 'done'});
         process.exit(0);
     });
 };
@@ -186,7 +186,52 @@ process.on('message', function(msg) {
     }
 });
 
+// Extends by terence tian
+var Event = function () {
+    this.handlers = {};
+    this.addEventHandler = function (type, handler) {
+        if (!this.handlers[type]) {
+            this.handlers[type] = [];
+        }
+        if (this.hasHandler(type,handler)===null) {
+            this.handlers[type].push(handler);
+        }
+    };
+    this.hasHandler = function (type, handler) {
+        var find = null;
+        var  _handlers = this.handlers[type];
+        if (_handlers) {
+            for (var i = 0; i < _handlers.length; i++) {
+                if(_handlers === handler) {
+                    find = i;
+                    break;
+                }
+            };
+        }
+        return find;
+    };
+    this.removeHandler = function (type, handler) {
+        var found = this.hasHandler(type, handler)
+        if (found !== null) {
+            this.handlers[type].splice(found, 1);
+        }
+    };
+    this.fire = function (type, data) {
+        var  _handlers = this.handlers[type];
+        for (var i = 0; i < _handlers.length; i++) {
+            var handler = _handlers[i];
+            handler.call(this, data);
+        };
+    };
+};
+var eventHandler = new Event();
+
 module.exports = {
+    // event: 'compiledone'
+    attachEvent: function (type, handler) {
+        eventHandler.addEventHandler(type, handler);
+        //console.log(eventHandler.handlers["compiledone"].length)
+    },  
     minify: function(cpmName, cpmRootPath, options) {
         // console.log("invole minify augments: ", cpmName, cpmRootPath, options);
         opt.destdir = options.destdir;

@@ -1,0 +1,6 @@
+{
+	"name":"sitetheme_2",
+	"target":"themes/sitetheme_2",
+	"assets": ["fonts/", "images/"],
+	"output": "live"
+}
