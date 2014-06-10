@@ -155,13 +155,13 @@ var walkerFinished = function(loader, chunks) {
         }
 
         // w("");
-        w("done.");
+        w("---======this minify has done=======---.");
         w("");
         // required to properly terminate a
         // node.process.fork() call, as defined by
         // <http://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options>
         eventHandler.fire("compiledone", {compiler_status: 'done'});
-        process.exit(0);
+        // process.exit(0); // in order to compile multi resource, dont't exist proccess.
     });
 };
 // Send message to parent node process, if any
@@ -230,7 +230,7 @@ module.exports = {
     // event: 'compiledone'
     attachEvent: function (type, handler) {
         eventHandler.addEventHandler(type, handler);
-        //console.log(eventHandler.handlers["compiledone"].length)
+        // console.log(eventHandler.handlers["compiledone"].length)
     },  
     minify: function(cpmName, cpmRootPath, options) {
         // console.log("invole minify augments: ", cpmName, cpmRootPath, options);

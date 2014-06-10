@@ -54,7 +54,7 @@ var cwd = process.cwd()
           // compile our customized components e.g. "./sitetheme_1" , "./sitetheme_1", "../external"
           // Note: cause of we use seajs module pattern to encapsulte all javascript behavior module, in compile compoents phase,
           // we only deal with static files and styles files.
-          compileAllComponents(config_deploy_source);
+          startCompileComponentModules(config_deploy_source);
         });
       });
     }); 
@@ -66,21 +66,26 @@ function isArray(obj) {
     return toString.call(obj) === "[object Array]";
 }
 
-function compileAllComponents(build_pathes) {
+var all_configed_compiled_components = [];
+function startCompileComponentModules(build_pathes){
   log.debug("build components->", build_pathes);
-  var all_components = JSON.parse(build_pathes);
-  if (!isArray(all_components)) {
+  all_configed_compiled_components = JSON.parse(build_pathes);
+  if (!isArray(all_configed_compiled_components)) {
     return log.error("the deploy command parameter `-d` should be an array string");
   }
-  // loop all components.
-  compileComponent(all_components);
+  compileNextComponent();
 }
 
-function compileComponent(all_components) {
-  var build_path = all_components.shift();
-  if (!build_path) {
-    return log.writeln("all components build has been done!");
+function compileNextComponent () {
+  var lasatedOne = all_configed_compiled_components.shift();
+  if (lasatedOne) {
+    compileComponent(lasatedOne, compileNextComponent);
+  } else {
+    process.exit(0);
   }
+}
+
+function compileComponent(build_path, callback) {
   log.writeln("start to build `", build_path,"`");
   //he base directory of current customized component.
   var component_basedir = path.join(cwd, build_path)
@@ -90,7 +95,9 @@ function compileComponent(all_components) {
     fs.exists(deployConfigPath, function(exist) {
       if (!exist) {
         log.error("Can't find the customized component config:  `" + deployConfigPath + "`");
+        callback();
       } else {
+
         // Get theonfig data from config file. 
         var deployConfig = fs.readJsonSync(deployConfigPath)
           // Get the target base dir for customized component module.
@@ -104,7 +111,6 @@ function compileComponent(all_components) {
          
         // Remove existed deployed components.
         fs.removeSync(component_target_base);
-
         // 1. Deploy all assets folders defined in deploy.json->assets: ["imagse/", "libs/"..]
         if (assets && isArray(assets)) {
           for (var i = 0; i < assets.length; i++) {
@@ -127,16 +133,12 @@ function compileComponent(all_components) {
               destdir: component_target_base,
               output: deployConfig.output
           };
-          minifier.attachEvent("compiledone", function (message){
-            log.writeln("build_path has been compiled successfully! ", message);
-            compileComponent(all_components);
-          });
+          minifier.attachEvent("compiledone", callback);
           minifier.minify(deployConfig.name, component_basedir, style_minify_opts);
         } else {
           log.warn("the ignore style compile config found, skip compile css files!");
-           compileComponent(all_components);
+          callback();
         }
-
        // 3. TODO build/deploy javascript.
     }
   });
