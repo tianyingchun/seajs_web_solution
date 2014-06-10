@@ -1,7 +1,7 @@
 {
   "family": "sea-libs",
   "name": "slideshow",
-  "version": "1.0.0",
+  "version": "1.0",
   "description": "the slideshow plugin based on jquery for seajs module",
   "homepage": "https://github.com/tianyingchun/seajs_web_solution",
   "author": "tianyingchun",

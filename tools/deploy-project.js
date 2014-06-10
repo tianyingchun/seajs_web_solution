@@ -4,14 +4,14 @@
  * we will first deploy sea-modules folder to project location.
  * then will deploy the project javascript folder...e.g. /static/ it's our external costomized assets
  */
-var program = require('../node_modules/commander');
-var grunt = require('../node_modules/grunt');
-var path = require("path");
-var fs = require('fs-extra');
-var minifier = require("./node-libs/minify");
+var program  = require('commander')
+  , log      = require("./node-libs/log")
+  , colors   = require("ansicolors")
+  , path     = require("path")
+  , fs       = require("fs-extra")
+  , minifier = require("./node-libs/minify");
 // command parameters.
-program
-    .version('0.0.1')
+program.version('0.0.1')
     .option('-t, --target [type]', 'the dintination directory used to store deployed files.')
     .option('-d, --deploy [type]', 'the module path which will be deploy for this project! ')
     .parse(process.argv);
@@ -46,9 +46,9 @@ function compileComponent(build_path) {
 
     fs.exists(deployConfigPath, function(exist) {
         if (!exist) {
-            grunt.fail.fatal("Can't find the customized component config:  `" + deployConfigPath + "`");
+            log.error("Can't find the customized component config:  `" + deployConfigPath + "`");
         } else {
-            grunt.log.write("To start building `" + build_path + "` ").ok();
+            log.writeln("To start building `" + build_path + "` ");
             // Get the config data from config file. 
             var deployConfig = fs.readJsonSync(deployConfigPath);
             // Get the target base dir for customized component module.
@@ -74,10 +74,10 @@ function compileComponent(build_path) {
                     // Copy assets into target folder.
                     fs.copySync(asset_deploy_source, asset_deploy_target);
 
-                    grunt.log.write("copy `" + build_path + "/" + assets[i] + "` to `" + path.join(config_deploy_target, componentName, assets[i]) + "` successfully ").ok();
+                    log.writeln("copy `" + build_path + "/" + assets[i] + "` to `" + path.join(config_deploy_target, componentName, assets[i]) + "` successfully ");
                 };
             } else {
-                grunt.fail.fatal("the `assets` node in deploy.json must be a array!");
+                log.error("the `assets` node in deploy.json must be a array!");
             }
             if (!ignoreCssCompile) {
                 // 2. Build/deploy styles
@@ -99,12 +99,12 @@ function compileComponent(build_path) {
     // 1. first step, remove seamodule dir if exist, and re-deploy seamodules to destination dir.
     fs.removeSync(deploy_seamodule_target);
     fs.mkdirs(deploy_seamodule_target, function(err) {
-        if (err) return console.error(err);
+        if (err) return log.error(err);
         var filter = null; //  is an regex instance.
         // copy files
         fs.copy(deploy_seamodule_source, deploy_seamodule_target, filter, function(err) {
-            if (err) return console.error(err);
-            grunt.log.write("deploy sea-modules to directory `" + deploy_seamodule_target + "` successfully! ").ok();
+            if (err) return log.error(err);
+            log.writeln("deploy sea-modules to directory `" + deploy_seamodule_target + "` successfully! ");
 
             // 2. second step, compile our customized components e.g. "../static" , "../static1", "../external"
             // Note: cause of we use seajs module pattern to encapsulte all javascript behavior module, in compile compoents phase,
