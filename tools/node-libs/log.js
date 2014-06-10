@@ -12,7 +12,7 @@ var debug = function () {
 
 //write string new line with green color.
 var writeln=  function () {
-	var result = format.apply(format, arguments);
+ 	var result = format.apply(format, arguments);
 	util.log(colors.green(result));
 };
 
