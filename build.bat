@@ -1,3 +1,9 @@
+@ECHO OFF
+REM #- http://docs.spmjs.org/doc/
+REM #- npm install spm-init -g
+REM #- npm install spm -g
+REM #- $ npm install spm-build -g
+REM #- $ spm plugin install deploy
 
 REM build @spm build, First, you should install spm and spm-build:
 REM Note: you must copy this file into your each seajs costomized module directory
