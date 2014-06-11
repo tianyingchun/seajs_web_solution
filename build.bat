@@ -1,22 +1,17 @@
 @ECHO OFF
-REM #- http://docs.spmjs.org/doc/
-REM #- npm install spm -g
-REM #- npm install spm-init -g
-REM #- $ npm install spm-build -g
-REM #- $ spm plugin install deploy
 
-REM build @spm build, First, you should install spm and spm-build:
-REM Note: you must copy this file into your each seajs costomized module directory
-REM e.g. sea-libs/slideshow/build.sh/build.bat
-ECHO "`spm build` executing..."
-spm build
-
-REM node location
-SET NODE=node.exe
+::Call 从一个批处理程序调用另一个批处理程序，并且不终止父批处理程序。
+::因为直接这里调用spm build 会终止后面的depoly-module 执行，所以针对WINDOW 单独用了一个CALL 
 
 SET CWD=%~dp0
+:: invoke spm build.bat for windows
+CALL ../../tools/spmbuild.bat %CWD%
 
-REM we can't move cd '../../tools/' to node ../../tools/deploy-module.js
+:: node location
+SET NODE=node.exe
+
 CD ../../tools/
 
 %NODE% deploy-module.js -p %CWD%
+
+CD %CWD%
