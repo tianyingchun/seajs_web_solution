@@ -1,5 +1,4 @@
-define(function(require, exports, module) {
-	//plugin author github: https://github.com/nolimits4web/Swiper
+//plugin author github: https://github.com/nolimits4web/Swiper
 	var Swiper = function(selector, params) {
 		/*=========================
       A little bit dirty but required part for IE8 and old FF support
@@ -2635,7 +2634,3 @@ define(function(require, exports, module) {
 	if (typeof(module) !== 'undefined') {
 		module.exports = Swiper;
 	}
-});
-
-
-

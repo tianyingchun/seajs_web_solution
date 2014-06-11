@@ -1,5 +1,4 @@
 {
-  "family":"biz_modules",
   "name": "product",
   "version": "1.0.0",
   "description": "the demo code for seajs website build,deploy engine",

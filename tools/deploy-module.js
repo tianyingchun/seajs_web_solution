@@ -52,6 +52,8 @@ fs.exists(packagePath, function(exist) {
         // fetch necessary configurations.
         var seaModuleCfg = {
             //optional parameter.
+            //Note: new version seajs don't support family configuration
+            //and it use standard code style of nodejs module.
             family: packageJson.family ||"", 
             name: packageJson.name,
             version: packageJson.version

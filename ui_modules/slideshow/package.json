@@ -1,7 +1,6 @@
 {
-  "family":"ui_modules",
   "name": "slideshow",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "the test demo for seajs build engine",
   "keywords": [],
   "homepage": "https://github.com/tianyingchun/seajs_web_solution",

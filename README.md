@@ -50,4 +50,6 @@
 - $ npm install spm -g          (version 3.0.1, $ spm -V)
 - $ npm install spm-init -g     (version 0.5.2, $ spm-init -V)   --or npm update spm-init -g
 - $ npm install spm-build -g    (version 0.3.15, $ spm-build -V)   --or npm update spm-build -g
-- $ npm install spm-deploy -g   (version 0.2.4, $ spm-deploy -V) or  spm plugin install deploy  
+- $ npm install spm-deploy -g   (version 0.2.4, $ spm-deploy -V) or  spm plugin install deploy 
+
+- spm install jquery@1.10.2   (install jquery with version 1.10.2 using spm)
