@@ -5,32 +5,32 @@
 ```
    the build/depoly engine structure diagram
    	seajs_web_solution
-	├── modules  (designed to wirte our business logics sea plugins)
+	├── biz_modules  (designed to wirte our business logics sea plugins)
 	│	├── payment  --the empty plugin demo
 	│	├── product  --the initialized plugin demo (`1.$ cd product/, 2. $: spm init`)
 	│	│	├── dist  --store built result files.
 	│	│	├── examples  --some test example for this plugin
 	│	│	├── src  --the plugin source code
 	│	│	├── tests --some test files 
-	│	│	├── build.sh  --the build batch, it will deploy this plugin lib into /sea-modules/..
-	│	│   └── package.json --the spm configurations for this plugin
-	│   └── README.md
+	│	│	├── build.sh  --the build batch for mac linux,  deploy this plugin lib into /sea-modules/..
+	│	│	├── build.bat  --the build batch for window,  deploy this plugin lib into /sea-modules/..
+	│	│ └── package.json --the spm configurations for this plugin
+	│ └── README.md
 	├── mode_modules  --store all depends node modules, it config in /package.json, use `npm install` 
 	│   ├── clean-css
 	│   ├── commander
 	│   ├── fs-extra
 	│   ├── ... -other node module specified in /package.json
-	│   └── grunt
-	├── sea-libs  --ourself defined sea common-used sea-modules. it will auto build to /sea-modules/..
-	│	├── dropdownlist  --exec `spm init`, step by step ..., it is the same with /modules(biz logics)
-	│	├── slideshow
-	│	├── tabs
+	│   └── ansicolors
+	├── sea-libs  --the third-part spm modules based on seajs.
+	│	├── jquery  --exec `spm init`, step by step ..., it is the same with /modules(biz logics)
 	│	├── other....
 	│	└── README.md
 	├── sea-modules  --the directory used to store all sea-modules(`/modules/..`,`/sea-libs/..`)
 	│	├── jquery   --the third-part sea-js module plugin
-	│	├── modules  --our business logics sea-modules ref `/modules/..`
-	│	├── sea-libs --our customized commonly used sea-plugin ref `/sea-libs/..`
+	│	├── product  --our business logics sea-modules ref `/biz_modules/..`
+	│	├── seajs    --spm install seajs from spm repository 
+	│	├── slideshow --our customized commonly used sea-plugin ref `/ui_modules/..`
 	│	├── ... --others
 	│	└── README.md
 	├── tools --designed to store internal build/deploy engine
