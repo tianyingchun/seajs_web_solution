@@ -7,7 +7,7 @@ var product = {
         pics.push(new picutre(3, "test pic 3", "http://www.baidu.com/", ""));
         pics.push(new picutre(4, "test pic 4", "http://www.baidu.com/", ""));
         pics.push(new picutre(5, "test pic 5", "http://www.baidu.com/", ""));
-    };
+    }
 };
 
 module.exports = product;

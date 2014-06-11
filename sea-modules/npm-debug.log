@@ -1,0 +1,78 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-d',
+1 verbose cli   './',
+1 verbose cli   'jquery@1.10.1' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ './', null ]
+6 verbose cache add name=undefined spec="./" args=["./",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: './',
+7 verbose parsed url   path: './',
+7 verbose parsed url   href: './' }
+8 verbose cache add [ 'jquery@1.10.1', null ]
+9 verbose cache add name=undefined spec="jquery@1.10.1" args=["jquery@1.10.1",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'jquery@1.10.1',
+10 verbose parsed url   path: 'jquery@1.10.1',
+10 verbose parsed url   href: 'jquery@1.10.1' }
+11 verbose cache add name="jquery" spec="1.10.1" args=["jquery","1.10.1"]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: '1.10.1',
+12 verbose parsed url   path: '1.10.1',
+12 verbose parsed url   href: '1.10.1' }
+13 verbose addNamed [ 'jquery', '1.10.1' ]
+14 verbose addNamed [ '1.10.1', '1.10.1' ]
+15 silly lockFile e308c3d3-jquery-1-10-1 jquery@1.10.1
+16 verbose lock jquery@1.10.1 /Users/tianyingchun/.npm/e308c3d3-jquery-1-10-1.lock
+17 silly lockFile 0ee6c175- ./
+18 verbose lock ./ /Users/tianyingchun/.npm/0ee6c175-.lock
+19 verbose url raw jquery/1.10.1
+20 verbose url resolving [ 'https://registry.npmjs.org/', './jquery/1.10.1' ]
+21 verbose url resolved https://registry.npmjs.org/jquery/1.10.1
+22 info trying registry request attempt 1 at 13:40:56
+23 http GET https://registry.npmjs.org/jquery/1.10.1
+24 silly lockFile 0ee6c175- ./
+25 silly lockFile 0ee6c175- ./
+26 error addLocal Could not install ./
+27 error Error: ENOENT, open 'package.json'
+28 error If you need help, you may report this *entire* log,
+28 error including the npm and node versions, at:
+28 error     <http://github.com/npm/npm/issues>
+29 error System Darwin 13.2.0
+30 error command "node" "/usr/local/bin/npm" "install" "-d" "./" "jquery@1.10.1"
+31 error cwd /Users/tianyingchun/百度云同步盘/PinAn_Works/seajs_web_solution/sea-modules
+32 error node -v v0.10.26
+33 error npm -v 1.4.3
+34 error path package.json
+35 error code ENOENT
+36 error errno 34
+37 verbose exit [ 34, true ]

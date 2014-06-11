@@ -20,8 +20,8 @@
         // define("jquery/jquery/1.10.1/jquery", [], function () { return jQuery; } );保持一致.
         alias: {
             // "seajs-debug": "seajs/seajs-debug/1.1.1/seajs-debug",
-            "jquery": "jquery/1.10.2/jquery.min.js", //=={jquery=paths.jquery}/jquery/1.10.1/jquery
-            "jquery-debug": "jquery/1.10.2/jquery.js"
+            "jquery": "jquery/1.10.2/jquery", //=={jquery=paths.jquery}/jquery/1.10.1/jquery
+            "jquery-debug": "jquery/1.10.1/jquery-debug"
         }
     });
     </script>
@@ -29,8 +29,10 @@
 
 <body>
     <script type="text/javascript">
-    seajs.use(["product/1.0.0/index-debug"], function(product) {
-    	console.log(product);
+    seajs.use(["jquery", "product/1.0.0/index-debug"], function($, product) {
+    	$(function () {
+            console.log(product);
+        })
     });
     </script>
 </body>
