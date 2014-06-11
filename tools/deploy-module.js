@@ -51,7 +51,8 @@ fs.exists(packagePath, function(exist) {
         var packageJson = fs.readJsonSync(packagePath);
         // fetch necessary configurations.
         var seaModuleCfg = {
-            family: packageJson.family,
+            //optional parameter.
+            family: packageJson.family ||"", 
             name: packageJson.name,
             version: packageJson.version
         };
@@ -70,13 +71,13 @@ fs.exists(packagePath, function(exist) {
                     log.writeln('remove existed target sea-module ',seaModuleCfg, '`successfully! ');
                     createModuleDir(sea_module_path, function() {
                         // deploy dist files.
-                        copyFiles2Dir(path.join(sea_lib_path, "dist"), sea_module_path);
+                        copyFiles2Dir(path.join(sea_lib_path, "dist", seaModuleCfg.name, seaModuleCfg.version), sea_module_path);
                     });
                 });
             } else {
                 createModuleDir(sea_module_path, function() {
                     // deploy dist files.
-                    copyFiles2Dir(path.join(sea_lib_path, "dist"), sea_module_path);
+                    copyFiles2Dir(path.join(sea_lib_path, "dist", seaModuleCfg.name, seaModuleCfg.version), sea_module_path);
                 });
             }
         });

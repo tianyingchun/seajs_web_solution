@@ -1,0 +1,32 @@
+{
+  "family":"biz_modules",
+  "name": "product",
+  "version": "1.0.0",
+  "description": "the demo code for seajs website build,deploy engine",
+  "keywords": [],
+  "homepage": "https://github.com/tianyingchun/seajs_web_solution",
+  "author": "tianyingchun",
+  "maintainers": [
+    "tianyingchun"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tianyingchun/seajs_web_solution.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tianyingchun/seajs_web_solution/issues"
+  },
+  "licenses": "MIT",
+  "spm": {
+    "main": "index.js",
+    "dependencies": {
+    },
+    "devDependencies": {
+      "expect.js": "0.3.1"
+    },
+    "engines": {
+      "seajs": "2.2.1"
+    },
+    "tests": "tests/*.js"
+  }
+}

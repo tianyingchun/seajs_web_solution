@@ -44,8 +44,10 @@
 - you can reference `o2o_web` here to see [o2o_web](https://github.com/tianyingchun/o2o_web), it an demo for this [`seajs_web_solution`](https://github.com/tianyingchun/seajs_web_solution)
 
 - BTW, for spm seajs module build we need to manuanly install spm build plugin as below
- 
+- http://docs.spmjs.org/cli/init
+
 - http://docs.spmjs.org/doc/
-- npm install spm-init -g
-- $ npm install spm-build -g
-- $ spm plugin install deploy
+- $ npm install spm -g          (version 3.0.1, $ spm -V)
+- $ npm install spm-init -g     (version 0.5.2, $ spm-init -V)   --or npm update spm-init -g
+- $ npm install spm-build -g    (version 0.3.15, $ spm-build -V)   --or npm update spm-build -g
+- $ npm install spm-deploy -g   (version 0.2.4, $ spm-deploy -V) or  spm plugin install deploy  
