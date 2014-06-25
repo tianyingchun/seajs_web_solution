@@ -1,0 +1,5 @@
+{
+	"name":"script_test",
+	"target":"scripts",
+	"output": "live"
+}

@@ -24,6 +24,7 @@
     "commander":"*",
     "clean-css": "2.x",
     "fs-extra": "*",
-    "ansicolors":"*"
+    "ansicolors":"*",
+    "uglify-js":"*"
   }
 }

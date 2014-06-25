@@ -125,9 +125,10 @@ function compileComponent(build_path, callback) {
             log.writeln("copy `" + build_path + "/" + assets[i] + "` to `" + path.join(config_deploy_target, componentName, assets[i]) + "` successfully ");
           };
         } else {
-          log.error("the `assets` node in deploy.json must be a array!");
+          log.warn("task ignored->the `assets` node in deploy.json could't found, it also should be array!");
         }
-        // 2. Build/deploy styles
+        // 2. Build/deploy styles, javascript, it will auto indentify the source file extention.css|.js
+        // we can ignore js/css files build and deploy process, only deploy assets resources.
         if (!ignoreCssCompile) {
           var style_minify_opts = {
               destdir: component_target_base,
@@ -139,7 +140,6 @@ function compileComponent(build_path, callback) {
           log.warn("the ignore style compile config found, skip compile css files!");
           callback();
         }
-       // 3. TODO build/deploy javascript.
     }
   });
 }

@@ -2,6 +2,7 @@
 var fs = require("fs"),
     path = require("path"),
     walker = require("./walker"),
+    uglify = require("../../node_modules/uglify-js"),
     CleanCSS = require("../../node_modules/clean-css"),
     program = require('../../node_modules/commander');
 
@@ -109,6 +110,32 @@ function concatCss(sheets, doneCB) {
     readAndParse();
 }
 
+var concatJs = function(loader, scripts) {
+    w("");
+    var blob = "";
+    for (var i = 0, script;
+        (script = scripts[i]); i++) {
+        w(script);
+        blob += "\n// " + path.relative(process.cwd(), script) + "\n" + compressJsFile(script) + "\n";
+    }
+    return blob;
+};
+
+var compressJsFile = function(inPath) {
+    var outputOpts = {
+        //          beautify: false,
+        //          indent_level: 4,
+        ascii_only: true
+    };
+    if (opt.beautify) {
+        outputOpts.beautify = true;
+        outputOpts.indent_level = 4;
+    }
+    var result = uglify.minify(inPath, {
+        output: outputOpts
+    });
+    return result.code;
+};
 
 var walkerFinished = function(loader, chunks) {
     // console.log("walker walkerFinished...");
@@ -141,6 +168,15 @@ var walkerFinished = function(loader, chunks) {
                             topDepends.push(cssFile);
                         }
                     }
+                    var js = concatJs(loader, chunk.scripts);
+                    if (js.length) {
+                        w("");
+                        var jsFile = opt.output + currChunk + ".js";
+                        fs.writeFileSync(path.resolve(opt.destdir, jsFile), js, "utf8");
+                        if (topDepends) {
+                            topDepends.push(jsFile);
+                        }
+                    }
                     currChunk++;
                     processNextChunk(done);
                 });
@@ -160,7 +196,9 @@ var walkerFinished = function(loader, chunks) {
         // required to properly terminate a
         // node.process.fork() call, as defined by
         // <http://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options>
-        eventHandler.fire("compiledone", {compiler_status: 'done'});
+        eventHandler.fire("compiledone", {
+            compiler_status: 'done'
+        });
         // process.exit(0); // in order to compile multi resource, dont't exist proccess.
     });
 };
@@ -187,22 +225,22 @@ process.on('message', function(msg) {
 });
 
 // Extends by terence tian
-var Event = function () {
+var Event = function() {
     this.handlers = {};
-    this.addEventHandler = function (type, handler) {
+    this.addEventHandler = function(type, handler) {
         if (!this.handlers[type]) {
             this.handlers[type] = [];
         }
-        if (this.hasHandler(type,handler)===null) {
+        if (this.hasHandler(type, handler) === null) {
             this.handlers[type].push(handler);
         }
     };
-    this.hasHandler = function (type, handler) {
+    this.hasHandler = function(type, handler) {
         var find = null;
-        var  _handlers = this.handlers[type];
+        var _handlers = this.handlers[type];
         if (_handlers) {
             for (var i = 0; i < _handlers.length; i++) {
-                if(_handlers === handler) {
+                if (_handlers === handler) {
                     find = i;
                     break;
                 }
@@ -210,14 +248,14 @@ var Event = function () {
         }
         return find;
     };
-    this.removeHandler = function (type, handler) {
+    this.removeHandler = function(type, handler) {
         var found = this.hasHandler(type, handler)
         if (found !== null) {
             this.handlers[type].splice(found, 1);
         }
     };
-    this.fire = function (type, data) {
-        var  _handlers = this.handlers[type];
+    this.fire = function(type, data) {
+        var _handlers = this.handlers[type];
         for (var i = 0; i < _handlers.length; i++) {
             var handler = _handlers[i];
             handler.call(this, data);
@@ -228,10 +266,10 @@ var eventHandler = new Event();
 
 module.exports = {
     // event: 'compiledone'
-    attachEvent: function (type, handler) {
+    attachEvent: function(type, handler) {
         eventHandler.addEventHandler(type, handler);
         // console.log(eventHandler.handlers["compiledone"].length)
-    },  
+    },
     minify: function(cpmName, cpmRootPath, options) {
         // console.log("invole minify augments: ", cpmName, cpmRootPath, options);
         opt.destdir = options.destdir;

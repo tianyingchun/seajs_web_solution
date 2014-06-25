@@ -7,4 +7,4 @@ deploypath="./deploy/"  #../deploy  or any available directory path.
 # -t deploy target directory, -d cutomized deploy modules.
 # 
 # build style components.
-node tools/deploy-project.js -t ${deploypath} -d '["./sitetheme_1", "./sitetheme_2","../static2","../external"]'
+node tools/deploy-project.js -t ${deploypath} -d '["./sitetheme_1", "./sitetheme_2","./scripts_test","../external"]'
