@@ -1,0 +1,6 @@
+{
+	"name":"script_test/plugin",
+	"target":"scripts/plugins",
+	"assets":["./"],
+	"ignoreMinify":true
+}

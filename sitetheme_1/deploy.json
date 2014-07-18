@@ -1,7 +1,7 @@
 {
 	"name":"sitetheme_1",
 	"target":"themes/sitetheme_1",
-	"ignoreCss":false,
+	"ignoreMinify":false,
 	"assets": ["fonts/", "images/"],
 	"output": "live"
 }

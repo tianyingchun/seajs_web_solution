@@ -12,4 +12,4 @@ REM -t deploy target directory, -d cutomized deploy modules.
 
 REM build style components.
 
-%NODE% tools/deploy-project.js -t %DEPLOY% -d [\"./sitetheme_1"\", \"./sitetheme_2"\",\"../static2"\",\"../external"\"]
+%NODE% tools/deploy-project.js -t %DEPLOY% -d [\"./sitetheme_1"\", \"./sitetheme_2"\",\"./scripts_test"\",\"./external"\",\"./scripts_test/plugins"\",\"./"\"]

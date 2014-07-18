@@ -43,28 +43,24 @@ function concatCss(sheets, doneCB) {
             if (!urlPath) {
                 return "url()";
             }
-
-            // skip data urls
-            if (/^data:/.test(urlPath)) {
+            // skip an external url (one that starts with <protocol>: or just //, includes data:)
+            if (/^([\w-]*:)|(\/\/)/.test(urlPath)) {
                 return "url('" + urlPath + "')";
             }
-            // skip an external link
-            if (/^http(:?s)?:/.test(urlPath)) {
-                return "url('" + urlPath + "'')";
-            }
+
             // Make relative asset path from 'top-of-the-tree/build'
             // var relPath = path.join("..", opt.relsrcdir, path.dirname(sheet), urlPath);
             var _tmpPath = path.relative(path.dirname(sheet), opt.srcdir);
-            var relPath = urlPath.slice(_tmpPath.length + 1);
+            var relPath = urlPath.slice(_tmpPath ? _tmpPath.length + 1 : 0);
 
             if (process.platform == "win32") {
                 relPath = pathSplit(relPath).join("/");
             }
-            console.log("opt.relsrcdir:", opt.relsrcdir);
-            console.log("sheet:", sheet);
+            // console.log("opt.relsrcdir:", opt.relsrcdir);
+            // console.log("sheet:", sheet);
             console.log("urlPath:", urlPath);
             console.log("relPath:", relPath);
-            console.log("path.dir: ", path.dirname(sheet));
+            // console.log("path.dir: ", path.dirname(sheet));
             return "url('" + relPath + "')";
         });
         // minify styles here.

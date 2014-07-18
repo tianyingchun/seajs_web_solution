@@ -1,0 +1,6 @@
+{
+	"name":"root",
+	"target":"./",
+	"ignoreMinify":"true",
+	"assets": ["demo.html"]
+}

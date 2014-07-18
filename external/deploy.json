@@ -1,0 +1,6 @@
+{
+	"name":"external",
+	"target":"scripts",
+	"ignoreMinify":"true",
+	"assets": ["token.html","partials/"]
+}
