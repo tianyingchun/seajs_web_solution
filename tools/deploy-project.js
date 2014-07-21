@@ -58,6 +58,9 @@ var cwd = process.cwd(), //read configuration parameters.
                     startCompileComponentModules(config_deploy_source);
                 });
             });
+        } else {
+            //if we have not seaj-modules in local dir, always do other component module buiding task.
+            startCompileComponentModules(config_deploy_source);
         }
     });
 })();
