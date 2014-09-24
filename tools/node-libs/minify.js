@@ -135,12 +135,19 @@ var compressJsFile = function(inPath) {
 
 var walkerFinished = function(loader, chunks) {
     // console.log("walker walkerFinished...");
-    var outfolder = path.dirname(path.join(opt.destdir, opt.output));
+    var cssOutFolder = path.dirname(path.join(opt.destdir, opt.output["css"]));
+    var jsOutputFolder = path.dirname(path.join(opt.destdir, opt.output["js"]));
+
     var exists = fs.existsSync || path.existsSync;
     var currChunk = 1;
     var topDepends;
-    if (outfolder != "." && !exists(outfolder)) {
-        fs.mkdirSync(outfolder);
+    // create css output dir folder.
+    if (cssOutFolder != "." && !exists(cssOutFolder)) {
+        fs.mkdirSync(cssOutFolder);
+    }
+    // create js output dir folder.
+    if (jsOutputFolder != "." && !exists(jsOutputFolder)) {
+        fs.mkdirSync(jsOutputFolder);
     }
     if ((chunks.length == 1) && (typeof chunks[0] == "object")) {
         topDepends = false;
@@ -158,7 +165,7 @@ var walkerFinished = function(loader, chunks) {
                 concatCss(chunk.sheets, function(css) {
                     if (css.length) {
                         w("");
-                        var cssFile = opt.output + currChunk + ".css";
+                        var cssFile = opt.output["css"] + currChunk;// + ".css";
                         fs.writeFileSync(path.resolve(opt.destdir, cssFile), css, "utf8");
                         if (topDepends) {
                             topDepends.push(cssFile);
@@ -167,7 +174,7 @@ var walkerFinished = function(loader, chunks) {
                     var js = concatJs(loader, chunk.scripts);
                     if (js.length) {
                         w("");
-                        var jsFile = opt.output + currChunk + ".js";
+                        var jsFile = opt.output["js"] + currChunk;// + ".js";
                         fs.writeFileSync(path.resolve(opt.destdir, jsFile), js, "utf8");
                         if (topDepends) {
                             topDepends.push(jsFile);
@@ -183,7 +190,7 @@ var walkerFinished = function(loader, chunks) {
     };
     processNextChunk(function() {
         if (topDepends) {
-            fs.writeFileSync(path.resolve(opt.destdir, opt.output + ".css"), "/* CSS loaded via enyo.depends() call in " + opt.output + ".js */", "utf8");
+            fs.writeFileSync(path.resolve(opt.destdir, opt.output["css"]/* + ".css"*/), "/* CSS loaded via enyo.depends() call in " + opt.output + ".js */", "utf8");
         }
 
         // w("");
@@ -269,8 +276,9 @@ module.exports = {
     minify: function(cpmName, cpmRootPath, options) {
         // console.log("invole minify augments: ", cpmName, cpmRootPath, options);
         opt.destdir = options.destdir;
-        opt.output = options.output;
-        opt.srcdir = cpmRootPath;
+        opt.output = options.output; // {"css":"","js":"dirpath"}
+        // the desting path is path.join(opt.destdir,opt.output["css"]|["js"])
+        opt.srcdir = cpmRootPath; //source directory.
         walker.init(cpmName, cpmRootPath);
         walker.walk(cpmRootPath + "/package.js", walkerFinished);
     }

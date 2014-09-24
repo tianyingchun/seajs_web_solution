@@ -53,3 +53,32 @@
 - $ npm install spm-deploy -g   (version 0.2.4, $ spm-deploy -V) or  spm plugin install deploy 
 
 - spm install jquery@1.10.2   (install jquery with version 1.10.2 using spm)
+
+###
+
+deploy.json  usage:
+
+```
+{
+    "name": "built home root",
+    "target": "./",
+    "ignoreMinify":false,
+    "assets": ["./index.html", "favicon.ico"],
+    "output":{ 
+    	"assets":"./",
+    	"css":"app/app.css",
+    	"js":"app/app.js"
+    }
+}
+
+```
+
+```
+{
+	"name":"build `/app/styles/`",
+	"target":"app/",
+	"output":""app
+}
+```
+
+

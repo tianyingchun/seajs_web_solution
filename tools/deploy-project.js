@@ -65,12 +65,23 @@ var cwd = process.cwd(), //read configuration parameters.
     });
 })();
 
+var toString = Object.prototype.toString;
 
 function isArray(obj) {
-    var toString = Object.prototype.toString;
     return toString.call(obj) === "[object Array]";
 }
 
+function isString(obj) {
+    return toString.call(obj) === "[object String]";
+}
+
+function isObject(obj) {
+    return toString.call(obj) === "[object Object]";
+}
+
+function trim(str) {
+    return str ? str.replace(/^\s+|\s+$/ig, "") : "";
+}
 var all_configed_compiled_components = [];
 
 function startCompileComponentModules(build_pathes) {
@@ -118,6 +129,10 @@ function compileComponent(build_path, callback) {
             if (assets && isArray(assets)) {
                 for (var i = 0; i < assets.length; i++) {
                     var asset_deploy_target = path.join(component_target_base, assets[i]);
+                    //makesure that if we have sepecificed an asset child dir folder.
+                    if (isObject(deployConfig.output)) {
+                        asset_deploy_target = path.join(component_target_base, deployConfig.output["assets"] || "", assets[i]);
+                    }
                     var asset_deploy_source = path.join(component_basedir, assets[i]);
                     // Remove current existed deployed item file or directory.
                     fs.removeSync(asset_deploy_target);
@@ -142,6 +157,20 @@ function compileComponent(build_path, callback) {
                     destdir: component_target_base,
                     output: deployConfig.output
                 };
+                // the output can be an string or object, convert into {"css":"xxx/xxx.css","js":"xxxx/xx.css"}
+                if (isString(deployConfig.output)) {
+                    minify_opts.output = {
+                        "css": deployConfig.output.replace(/.js$/, "") + ".css",
+                        "js": deployConfig.output.replace(/.css$/, "") + ".js"
+                    };
+                } else if (isObject(deployConfig.output)) {
+                    if (!trim(deployConfig.output["css"]) || !trim(deployConfig.output["js"])) {
+                        log.error("the [output] must be an object and contains {'css':'','js':''}");
+                        callback();
+                        return;
+                    }
+                }
+
                 minifier.attachEvent("compiledone", callback);
                 minifier.minify(deployConfig.name, component_basedir, minify_opts);
             } else {
