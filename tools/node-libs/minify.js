@@ -163,8 +163,14 @@ var walkerFinished = function(loader, chunks) {
                 processNextChunk(done);
             } else {
                 concatCss(chunk.sheets, function(css) {
+                     // add compiled time: new date();
+                    var compiledTime = new Date();
+
                     if (css.length) {
                         w("");
+
+                        css = "/* Compiled Time: " + compiledTime + "*/\n" + css;
+
                         var cssFile = opt.output["css"] + currChunk;// + ".css";
                         fs.writeFileSync(path.resolve(opt.destdir, cssFile), css, "utf8");
                         if (topDepends) {
@@ -174,6 +180,9 @@ var walkerFinished = function(loader, chunks) {
                     var js = concatJs(loader, chunk.scripts);
                     if (js.length) {
                         w("");
+
+                        js = "/* Compiled Time: " + compiledTime + "*/\n" + js;
+                        
                         var jsFile = opt.output["js"] + currChunk;// + ".js";
                         fs.writeFileSync(path.resolve(opt.destdir, jsFile), js, "utf8");
                         if (topDepends) {
