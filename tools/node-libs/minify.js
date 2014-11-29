@@ -65,7 +65,12 @@ function concatCss(sheets, doneCB) {
         });
         // minify styles here.
         // 
-        code = new CleanCSS().minify(code);
+        // disabled advanced: set to true to disable advanced optimizations - selector & property merging, reduction, etc.
+        // cause of we encountered with background-size: merge issue in some mobile broswer.
+        var cleanCssOption = {
+            noAdvanced: true
+        };
+        code = new CleanCSS(cleanCssOption).minify(code);
         blob += "\n/* " + path.relative(process.cwd(), sheet) + " */\n" + code + "\n";
     };
     // Pops one sheet off the sheets[] array, reads (and parses if less), and then
