@@ -164,10 +164,16 @@ function compileComponent(build_path, callback) {
                         "js": deployConfig.output.replace(/.css$/, "") + ".js"
                     };
                 } else if (isObject(deployConfig.output)) {
-                    if (!trim(deployConfig.output["css"]) || !trim(deployConfig.output["js"])) {
+                    var css = trim(deployConfig.output["css"]);
+                    var js = trim(deployConfig.output["js"]);
+                    if (!css && !js) {
                         log.error("the [output] must be an object and contains {'css':'','js':''}");
                         callback();
                         return;
+                    } else if (!css && js) {
+                        deployConfig.output["css"] = js.replace(/.js/, "") + ".css";
+                    } else if (css && !js) {
+                        deployConfig.output["js"] = css.replace(/.css/, "") + ".js";
                     }
                 }
 
